@@ -13,8 +13,8 @@ public class GameScoreboard {
     private final GamePlayer playerManager;
     @Setter
     @Getter
-    private ScoreboardScore[] oldScores;
     private ScoreboardScore[] newScores;
+    private ScoreboardScore[] oldScores;
     protected final PlayerConnection connection;
     protected final Scoreboard scoreboard;
     protected final ScoreboardObjective objective;
@@ -33,11 +33,8 @@ public class GameScoreboard {
         return score;
     }
 
-    private void replaceScore(String message, int slot) {
-    }
-
     public void initScoreboard() {
-        this.objective.setDisplayName("§e§lSKYWARS");
+        this.objective.setDisplayName("§e§lSCOREBOARD");
         PacketPlayOutScoreboardObjective packet1 = new PacketPlayOutScoreboardObjective(this.objective, 0);
 
         this.connection.sendPacket(packet1);
@@ -47,12 +44,12 @@ public class GameScoreboard {
         this.newScores = new ScoreboardScore[]{
                 this.playerManager.getPlayer().isSneaking() ? this.createScore("§cYou are now sneaking!", 8) : null,
                 this.createScore("  ", 7),
-                this.createScore("Total Kills: §a0", 6),
-                this.createScore("Total Wins: §a0", 5),
+                this.createScore("Kills (Dummy): §a0", 6),
+                this.createScore("Wins (Dummy): §a0", 5),
                 this.createScore(" ", 4),
                 this.createScore("Coins: §6" + String.format("%,d", this.playerManager.getCoins()), 3),
                 this.createScore("", 2),
-                this.createScore("§emc.hypixel.net", 1)
+                this.createScore("§ewww.example.com", 1)
         };
 
         PacketPlayOutScoreboardObjective packet1 = new PacketPlayOutScoreboardObjective(this.objective, 2);

@@ -24,9 +24,11 @@ public class Test extends JavaPlugin {
     private void init() {
         Test.instance = this;
 
+        // コマンドの登録
         CraftServer server = (CraftServer) Bukkit.getServer();
         server.getCommandMap().register("Test", new CoincCommand());
 
+        // イベントリスナーの登録
         Bukkit.getPluginManager().registerEvents(new EventListener(), this);
     }
 }

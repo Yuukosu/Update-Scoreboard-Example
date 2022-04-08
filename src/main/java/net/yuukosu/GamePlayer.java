@@ -22,12 +22,15 @@ public class GamePlayer {
     }
 
     public void init() {
+        // スコアボードの作成
         this.scoreboard.initScoreboard();
 
+        // 1 tick ごとにスコアボードを更新する
         new BukkitRunnable() {
 
             @Override
             public void run() {
+                // プレイヤーリストにプレイヤーのUUIDが存在していたらスコアボードを更新する
                 if (Test.getPlayers().containsKey(GamePlayer.this.player.getUniqueId())) {
                     GamePlayer.this.scoreboard.updateScoreboard();
                     return;
