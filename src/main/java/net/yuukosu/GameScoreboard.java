@@ -10,7 +10,7 @@ import org.bukkit.craftbukkit.v1_8_R3.scoreboard.CraftScoreboard;
 public class GameScoreboard {
 
     @Getter
-    private final GamePlayer playerManager;
+    private final GamePlayer gamePlayer;
     @Setter
     @Getter
     private ScoreboardScore[] newScores;
@@ -19,9 +19,9 @@ public class GameScoreboard {
     protected final Scoreboard scoreboard;
     protected final ScoreboardObjective objective;
 
-    public GameScoreboard(GamePlayer playerManager) {
-        this.playerManager = playerManager;
-        this.connection = ((CraftPlayer) this.playerManager.getPlayer()).getHandle().playerConnection;
+    public GameScoreboard(GamePlayer gamePlayer) {
+        this.gamePlayer = gamePlayer;
+        this.connection = ((CraftPlayer) this.gamePlayer.getPlayer()).getHandle().playerConnection;
         this.scoreboard = ((CraftScoreboard) Bukkit.getScoreboardManager().getNewScoreboard()).getHandle();
         this.objective = this.scoreboard.registerObjective("SIDEBAR", IScoreboardCriteria.b);
     }
@@ -42,12 +42,12 @@ public class GameScoreboard {
 
     public void updateScoreboard() {
         this.newScores = new ScoreboardScore[]{
-                this.playerManager.getPlayer().isSneaking() ? this.createScore("§cYou are now sneaking!", 8) : null,
+                this.gamePlayer.getPlayer().isSneaking() ? this.createScore("§cYou are now sneaking!", 8) : null,
                 this.createScore("  ", 7),
                 this.createScore("Kills (Dummy): §a0", 6),
                 this.createScore("Wins (Dummy): §a0", 5),
                 this.createScore(" ", 4),
-                this.createScore("Coins: §6" + String.format("%,d", this.playerManager.getCoins()), 3),
+                this.createScore("Coins: §6" + String.format("%,d", this.gamePlayer.getCoins()), 3),
                 this.createScore("", 2),
                 this.createScore("§ewww.example.com", 1)
         };
